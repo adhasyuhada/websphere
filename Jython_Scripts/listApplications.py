@@ -1,0 +1,1 @@
+print AdminApp.list()
