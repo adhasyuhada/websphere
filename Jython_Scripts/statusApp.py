@@ -1,4 +1,4 @@
-appStatus = AdminControl.completeObjectName('node=DefaultNode01,cell=DefaultCell01,type=Application,name=demo,*')
+appStatus = AdminControl.completeObjectName('node=DefaultNode01,cell=DefaultCell01,type=Application,name=demo-ear,*')
 print appStatus
 
 if (appStatus != ''):

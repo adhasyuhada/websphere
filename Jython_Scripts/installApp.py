@@ -1,10 +1,10 @@
 #install the application
 
-deployWAR="/tmp/websphere/demo.war"
+deployEAR="/tmp/websphere/demo.ear"
 
-appName="demo"
+appName="demo-ear"
 
-AdminApp.install(deployWAR, "-appname "+ appName + " -node DefaultNode01 -server server1 -usedefaultbindings");
+AdminApp.install(deployEAR, "-appname "+ appName + " -node DefaultNode01 -server server1 -defaultbinding.virtual.host default_host -usedefaultbindings");
 
 #save
 

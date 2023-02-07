@@ -1,8 +1,6 @@
 #Uninstall the application
 
-deployWAR="/tmp/websphere/demo.war"
-
-appName="demo"
+appName="demo-ear"
 
 AdminApp.uninstall(appName);
 

@@ -2,6 +2,6 @@ appManager = AdminControl.queryNames('cell=DefaultCell01,node=DefaultNode01,type
 
 print appManager
 
-AdminControl.invoke(appManager, 'startApplication', 'demo')
+AdminControl.invoke(appManager, 'startApplication', 'demo-ear')
 
 
