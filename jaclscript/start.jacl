@@ -1,0 +1,27 @@
+set AppName "demo-ear"
+
+# Start EAR on desapp01_WAS9
+set appManager [$AdminControl queryNames cell=DefaultCell01,node=DefaultNode01,type=ApplicationManager,process=server1,*]
+
+$AdminControl invoke $appManager startApplication $AppName
+
+# Check Application Status to verfiy the application is started
+# Note: if the application is running, the command returns the MBean Object name
+#       that manages such application, i.e. the variable "$appStatus" should not be null
+
+set appStatus1 [$AdminControl completeObjectName cell=DefaultCell01,node=DefaultNode01,type=Application,name=$AppName,*]
+puts $appStatus1
+
+puts ""
+if {$appStatus1 != ""} {
+  puts "The MBean for this application on cell=desapp01Cell_WAS9,node=desapp01_WAS9 is running."
+} else {
+  puts "The MBean for this application on cell=desapp01Cell_WAS9,node=desapp01_WAS9 is NOT running."
+  puts ">>The application cannot be started on cell=desapp01Cell_WAS9,node=desapp01_WAS9."
+}
+puts ""
+
+if {$appStatus1 != ""} {
+    puts ">>THE APPLICATION HAS BEEN STARTED"
+}
+

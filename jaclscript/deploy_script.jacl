@@ -1,0 +1,51 @@
+set AppName "demo-ear"
+set PathFile "/tmp/websphere/demo.ear"
+
+puts "==============  Strating Print List Application =============="
+set apps [$AdminApp list]
+puts "Applications currently installed:\n$apps"
+puts "==============  End Print List Application      =============="
+
+set app [$AdminControl completeObjectName type=Application,name=$AppName,*]
+puts $app
+if {$app != " "} {
+  puts "==============  Application $AppName exist    =============="
+  $AdminApp uninstall $AppName
+  $AdminConfig save
+  puts "==============  End uninstall application     =============="
+} else {
+puts "==============Application $AppName doesn't exist=============="
+}
+
+#install script
+puts "==============  Installing $AppName Application =============="
+$AdminApp install $PathFile "-appname $AppName -node DefaultNode01 -server server1 -defaultbinding.virtual.host default_host -usedefaultbindings"
+
+$AdminConfig save
+puts "=========== Installing $AppName Application done ============="
+
+# Start EAR on desapp01_WAS9
+puts "===========    Starting $AppName Application     ============="
+set appManager [$AdminControl queryNames cell=DefaultCell01,node=DefaultNode01,type=ApplicationManager,process=server1,*]
+
+$AdminControl invoke $appManager startApplication $AppName
+
+# Check Application Status to verfiy the application is started
+# Note: if the application is running, the command returns the MBean Object name
+#       that manages such application, i.e. the variable "$appStatus" should not be null
+
+set appStatus1 [$AdminControl completeObjectName cell=DefaultCell01,node=DefaultNode01,type=Application,name=$AppName,*]
+puts $appStatus1
+
+if {$appStatus1 != ""} {
+  puts "The MBean for this application on cell=desapp01Cell_WAS9,node=desapp01_WAS9 is running."
+} else {
+  puts "The MBean for this application on cell=desapp01Cell_WAS9,node=desapp01_WAS9 is NOT running."
+  puts ">>The application cannot be started on cell=desapp01Cell_WAS9,node=desapp01_WAS9."
+}
+
+if {$appStatus1 != ""} {
+    puts ">>THE APPLICATION HAS BEEN STARTED"
+}
+
+puts "===========  Starting $AppName Application done  ============="

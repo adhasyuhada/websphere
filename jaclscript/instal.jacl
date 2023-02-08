@@ -1,0 +1,9 @@
+set AppName "demo-ear"
+
+# SourceFile=:1
+set AppPath "/tmp/websphere/demo.ear"
+
+# Install EAR
+$AdminApp install $AppPath "-appname $AppName -node DefaultNode01 -server server1 -defaultbinding.virtual.host default_host -usedefaultbindings"
+
+$AdminConfig save

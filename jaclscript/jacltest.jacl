@@ -1,0 +1,17 @@
+set AppName "demo-ear"
+
+set appStatus1 [$AdminControl completeObjectName cell=DefaultCell01,node=DefaultNode01,type=Application,name=$AppName,*]
+puts $appStatus1
+
+puts ""
+if {$appStatus1 != ""} then {
+  puts "The MBean for this application on cell=desapp01Cell_WAS9,node=desapp01_WAS9 is running."
+} else {
+  puts "The MBean for this application on cell=desapp01Cell_WAS9,node=desapp01_WAS9 is NOT running."
+  puts ">>The application cannot be started on cell=desapp01Cell_WAS9,node=desapp01_WAS9."
+}
+puts ""
+
+if {$appStatus1 != ""} {
+    puts ">>THE APPLICATION HAS BEEN STARTED"
+}

@@ -1,0 +1,20 @@
+set AppName "demo-ear"
+
+puts "==============Strating Print List Application=============="
+set apps [$AdminApp list]
+puts "Applications currently installed:\n$apps"
+puts "==============End Print List Application=============="
+
+set app [$AdminControl completeObjectName type=Application,name=$AppName,*]
+puts $app
+if {$app != ""} {
+  puts "==============Application $AppName exist=============="
+  $AdminApp uninstall $AppName 
+  $AdminConfig save
+  puts "==============End uninstall application =============="
+} else {
+ puts "==============Application $AppName does not exist=============="
+}
+
+
+
